@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Notes</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+</head>
+
+<body>
+    <header class="container">
+        <nav>
+            <ul>
+                <li><strong><a href="/notes">Notes</a></strong></li>
+            </ul>
+            <ul>
+                <li><a href="/notes/new">Create</a></li>
+                <li><a href="/notes">All notes</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+
+        <hgroup>
+            <h3>Add new note</h3>
+            <p>Just write something here not too long!</p>
+        </hgroup>
+        <form action="/notes/create" method="POST">
+            <div><input type="text" id="text" name="inputBlog" placeholder="Text" required></div>
+            <div><input type="submit"></div>
+        </form>
+
+    </main>
+
+</body>
+
+</html>
