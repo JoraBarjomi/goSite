@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Notes</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+</head>
+
+<body>
+    <header class="container">
+        <nav>
+            <ul>
+                <li><strong><a href="/">Site</a></strong></li>
+            </ul>
+            <ul>
+                <li><a href="/notes">Notes</a></li>
+                <li><a href="/todo">ToDo</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <hgroup>
+            <h3>Notes</h3>
+            <p>The simple space for notes. Just write something here not too long!</p>
+        </hgroup>
+        <form action="/notes/create" method="POST">
+            <div class="grid">
+                <div><input type="text" id="text" name="textInput" placeholder="Text" required minlength="5"
+                        maxlength="120"></div>
+                <div><input type="text" id="author" name="authorInput" placeholder="Author" required minlength="4"
+                        maxlength="20"></div>
+            </div>
+            <div><input type="submit"></div>
+        </form>
+        <div>
+            <h6>Found <ins>{{.NoteCount}}</ins> notes:</h6>
+        </div>
+        <div>
+            <ul>
+                {{range .Notes}}
+                <blockquote>
+                    {{.Text}}
+                    <footer>
+                        <cite>- {{.Author}}</cite>
+                    </footer>
+                </blockquote>
+                {{end}}
+            </ul>
+        </div>
+    </main>
+
+</body>
+
+</html>

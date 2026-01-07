@@ -4,7 +4,7 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Notes</title>
+    <title>Site</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
 </head>
@@ -13,36 +13,19 @@
     <header class="container">
         <nav>
             <ul>
-                <li><strong><a href="/notes">Notes</a></strong></li>
+                <li><strong><a href="/">Site</a></strong></li>
             </ul>
             <ul>
-                <li><a href="/notes/new">Create</a></li>
-                <li><a href="/notes">All notes</a></li>
+                <li><a href="/notes">Notes</a></li>
+                <li><a href="/todo">ToDo</a></li>
             </ul>
         </nav>
     </header>
 
     <main class="container">
         <hgroup>
-            <h3>Notes</h3>
-            <p>The simple space for notes. Write <a href="/notes/new"> new note</a></p>
+            <h3>Main</h3>
         </hgroup>
-        <div>
-            <h6>Found <ins>{{.NoteCount}}</ins> notes:</h6>
-        </div>
-        <div>
-            <ul>
-                {{range .Notes}}
-                <blockquote>
-                    {{.}} 
-                    <footer>
-                        <cite>- Gosha</cite>
-                    </footer>
-                </blockquote>
-
-                {{end}}
-            </ul>
-        </div>
     </main>
 
 </body>

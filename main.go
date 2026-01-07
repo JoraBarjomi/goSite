@@ -8,10 +8,12 @@ import (
 
 func main() {
 	http.HandleFunc("/", handlers.MainHandler)
-	http.HandleFunc("/notes", handlers.MainHandler)
-	http.HandleFunc("/notes/new", handlers.NewHandler)
-	http.HandleFunc("/notes/create", handlers.CreateHandler)
+	http.HandleFunc("/notes", handlers.NotesHandler)
+	http.HandleFunc("/notes/create", handlers.CreateNoteHandler)
+	http.HandleFunc("/todo", handlers.TodoHandler)
+	http.HandleFunc("/todo/create", handlers.CreateTodoHandler)
+	http.HandleFunc("/todo/update", handlers.UpdateTodoHandler)
 
-	err := http.ListenAndServe("localhost:8080", nil)
+	err := http.ListenAndServe("localhost:8088", nil)
 	utils.Check(err)
 }
