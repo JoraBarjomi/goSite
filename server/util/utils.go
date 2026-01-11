@@ -15,6 +15,13 @@ func Check(err error) {
 	}
 }
 
+func CheckLog(err error) {
+	if err != nil {
+		log.Println(err)
+		return
+	}
+}
+
 type Note struct {
 	Author string
 	Text   string
