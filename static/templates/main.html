@@ -19,11 +19,16 @@
                 <li><a href="/notes">Notes</a></li>
                 <li><a href="/todo">ToDo</a></li>
                 <li><a href="/chat">Chat</a></li>
+                <li><a href="/login">Login</a></li>
             </ul>
         </nav>
     </header>
 
     <h5>Main page. There is nothing...</h5>
+    {{if .AvatarURL}}
+    <img src=" {{.AvatarURL}}" width="80" height="80">
+    {{end}}
+    <h6>Hello {{.Email}} !</h6>
 
 </body>
 

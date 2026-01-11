@@ -20,7 +20,22 @@ var db = utils.InitConn()
 func MainHandler(writer http.ResponseWriter, request *http.Request) {
 	html, err := template.ParseFiles("static/templates/main.html")
 	utils.Check(err)
-	err = html.Execute(writer, nil)
+	session, _ := gothic.Store.Get(request, "app_session")
+	userID, ok := session.Values["user_id"]
+	if !ok {
+		http.Redirect(writer, request, "/login", http.StatusSeeOther)
+		return
+	}
+
+	user := utils.GetUserFromDB(userID.(int))
+	if user == nil {
+		http.Redirect(writer, request, "/login", http.StatusSeeOther)
+		return
+	}
+
+	log.Println("Hello, ", user.Nickname)
+
+	err = html.Execute(writer, user)
 	utils.Check(err)
 }
 
@@ -100,6 +115,23 @@ func UpdateTodoHandler(writer http.ResponseWriter, request *http.Request) {
 	http.Redirect(writer, request, "/todo", http.StatusFound)
 }
 
+func LoginHandler(writer http.ResponseWriter, request *http.Request) {
+	html, err := template.ParseFiles("static/templates/auth/login.html")
+	utils.Check(err)
+	err = html.Execute(writer, nil)
+	utils.Check(err)
+}
+
+func LogoutHandler(writer http.ResponseWriter, request *http.Request) {
+	session, _ := gothic.Store.Get(request, "app_session")
+	session.Options.MaxAge = -1
+	session.Values = make(map[interface{}]interface{})
+	session.Save(request, writer)
+
+	log.Println("User logged out")
+	http.Redirect(writer, request, "/login", http.StatusSeeOther)
+}
+
 func InitGoogle() {
 	err := godotenv.Load()
 	if err != nil {
@@ -114,15 +146,16 @@ func InitGoogle() {
 }
 
 func GoogleAuthHandler(writer http.ResponseWriter, request *http.Request) {
-	q := request.URL.Query()
-	q.Add("provider", "google")
-	request.URL.RawQuery = q.Encode()
-	if gothUser, err := gothic.CompleteUserAuth(writer, request); err == nil {
-		log.Println("User already logged in:", gothUser.Email)
+	session, _ := gothic.Store.Get(request, "app_session")
+	if _, ok := session.Values["user_id"]; ok {
+		log.Println("User already logged in:")
 		http.Redirect(writer, request, "/", http.StatusSeeOther)
 		return
 	}
 
+	q := request.URL.Query()
+	q.Add("provider", "google")
+	request.URL.RawQuery = q.Encode()
 	gothic.BeginAuthHandler(writer, request)
 }
 
@@ -132,6 +165,11 @@ func GoogleCallbackHandler(writer http.ResponseWriter, request *http.Request) {
 		http.Error(writer, err.Error(), http.StatusUnauthorized)
 		return
 	}
-	log.Println("New user: ", user)
+	log.Println("New user: ", user.NickName)
+	dbUserId := utils.SaveUserToDB(user)
+	session, _ := gothic.Store.Get(request, "app_session")
+	session.Values["user_id"] = dbUserId
+	session.Save(request, writer)
+
 	http.Redirect(writer, request, "/", http.StatusSeeOther)
 }

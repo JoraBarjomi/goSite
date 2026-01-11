@@ -1,73 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login - Site</title>
-    <meta name="description" content="A minimalist layout for Login pages. Built with Pico CSS.">
-    <link rel="shortcut icon" href="https://picocss.com/favicon.ico">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
-  </head>
 
-  <body>
-    <nav class="container-fluid">
-      <ul>
-        <li>
-          <a href="./" class="contrast" onclick="event.preventDefault()"><strong>Site</strong></a>
-        </li>
-      </ul>
-    </nav>
-    <main class="container">
-      <article class="grid">
-        <div>
-          <hgroup>
-            <h1>Sign in</h1>
-            <p>A minimalist layout for Login pages</p>
-          </hgroup>
-          <form>
-            <input
-              type="text"
-              name="login"
-              placeholder="Login"
-              aria-label="Login"
-              autocomplete="username"
-              required
-            >
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              aria-label="Password"
-              autocomplete="current-password"
-              required
-            >
-            <fieldset>
-              <label for="remember">
-                <input type="checkbox" role="switch" id="remember" name="remember">
-                Remember me
-              </label>
-            </fieldset>
-            <button type="submit" class="contrast" onclick="event.preventDefault()">Login</button>
-          </form>
-          <button type="submit" class="contrast"><a href="/auth/google">Login with google</a></button>
-        </div>
-        <div></div>
-      </article>
-    </main>
-    <!-- ./ Main -->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login - Site</title>
+  <meta name="description" content="A minimalist layout for Login pages. Built with Pico CSS.">
+  <link rel="shortcut icon" href="https://picocss.com/favicon.ico">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+</head>
 
-    <!-- Footer -->
-    <footer class="container-fluid">
-      <small
-        >Built with <a href="https://picocss.com" class="secondary">Pico</a> •
-        <a href="https://github.com/picocss/examples/tree/master/v1-sign-in/" class="secondary"
-          >Source code</a
-        ></small
-      >
-    </footer>
-    <!-- ./ Footer -->
+<body>
+  <nav class="container-fluid">
+    <ul>
+      <li><strong><a href="/">Site</a></strong></li>
+    </ul>
+    <ul>
+      <li><strong><a href="/logout">Logout</a></strong></li>
+    </ul>
+  </nav>
+  <main class="container">
+    <article class="grid">
+      <div>
+        <hgroup>
+          <h1>Sign in</h1>
+          <p>A minimalist layout for Login pages</p>
+        </hgroup>
+        <form>
+          <input type="text" name="login" placeholder="Login" aria-label="Login" autocomplete="username" required>
+          <input type="password" name="password" placeholder="Password" aria-label="Password"
+            autocomplete="current-password" required>
+          <fieldset>
+            <label for="remember">
+              <input type="checkbox" role="switch" id="remember" name="remember">
+              Remember me
+            </label>
+          </fieldset>
+          <button type="submit" class="contrast" onclick="event.preventDefault()">Login</button>
+        </form>
+        <button type="submit" class="contrast"><a href="/auth/google">Login with google</a></button>
+      </div>
+      <div></div>
+    </article>
+  </main>
+  <!-- ./ Main -->
 
-    <!-- Minimal theme switcher -->
-    <script src="js/minimal-theme-switcher.js"></script>
-  </body>
+  <!-- Footer -->
+  <footer class="container-fluid">
+    <small>Built with <a href="https://picocss.com" class="secondary">Pico</a> •
+      <a href="https://github.com/picocss/examples/tree/master/v1-sign-in/" class="secondary">Source code</a></small>
+  </footer>
+  <!-- ./ Footer -->
+
+  <!-- Minimal theme switcher -->
+  <script src="js/minimal-theme-switcher.js"></script>
+</body>
+
 </html>
