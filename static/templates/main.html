@@ -1,35 +1,154 @@
-<!DOCTYPE html>
-<html>
+{{define "content"}}
 
-<head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Site</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
-</head>
+{{if not .IsLoggedIn}}
+<section class="hero is-warning is-medium">
+    <a href="/login">
+        <div class="hero-body">
+            <p class="title">Login</p>
+            <p class="subtitle">or sign up</p>
+        </div>
+    </a>
+</section>
+{{else}}
+<section class="notification is-primary">
+        <div class="columns">
+            <div class="column is-two-fifths">
+                <p class="title">Hello, {{.User.Email}}</p>
+            </div>
+            <div class="column"> 
+                {{if .User.AvatarURL}}
+                <img src=" {{.User.AvatarURL}}" width="80" height="80">
+                {{end}}
+            </div>
+        </div>
+</section>
+{{end}}
 
-<body>
-    <header class="container">
-        <nav>
-            <ul>
-                <li><strong><a href="/">Site</a></strong></li>
-            </ul>
-            <ul>
-                <li><a href="/notes">Notes</a></li>
-                <li><a href="/todo">ToDo</a></li>
-                <li><a href="/chat">Chat</a></li>
-                <li><a href="/login">Login</a></li>
-            </ul>
-        </nav>
-    </header>
+<section class="section">
+    <h1 class="title">Main page</h1>
+    <h2 class="subtitle">
+        This is main page of the <strong>site</strong>.
+    </h2>
+</section>
 
-    <h5>Main page. There is nothing...</h5>
-    {{if .AvatarURL}}
-    <img src=" {{.AvatarURL}}" width="80" height="80">
-    {{end}}
-    <h6>Hello {{.Email}} !</h6>
+<div class="columns is-multiline is-centered m-5 ">
+    <div class="column">
+        <a href="/notes">
+            <div class="card card-project is-hoverable">
+                <div class="card-content has-text-centered">
+                    <span class="icon">
+                        <i class="fa-solid fa-list fa-2x"></i>
+                    </span>
+                    <h3 class="subtitle is-3">Notes</h3>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="column">
+        <a href="/todo">
+            <div class="card card-project is-hoverable">
+                <div class="card-content has-text-centered">
+                    <span class="icon">
+                        <i class="fa-solid fa-check fa-2x"></i>
+                    </span>
+                    <h3 class="subtitle is-3">ToDo</h3>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="column">
+        <a href="/chat">
+            <div class="card card-project is-hoverable">
+                <div class="card-content has-text-centered">
+                    <span class="icon">
+                        <i class="fa-sharp fa-solid fa-comment fa-2x"></i>
+                    </span>
+                    <h3 class="subtitle is-3">Chat</h3>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
 
-</body>
 
-</html>
+
+<div class="columns is-multiline is-centered m-5 ">
+    <div class="column">
+        <a href="/notes">
+            <div class="card card-project is-hoverable">
+                <div class="card-content has-text-centered">
+                    <span class="icon">
+                        <i class="fa-brands fa-github fa-2x"></i>
+                    </span>
+                    <h3 class="subtitle is-3">Notes</h3>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="column">
+        <a href="/todo">
+            <div class="card card-project is-hoverable">
+                <div class="card-content has-text-centered">
+                    <span class="icon">
+                        <i class="fa-brands fa-google fa-2x"></i>
+                    </span>
+                    <h3 class="subtitle is-3">ToDo</h3>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="column">
+        <a href="/chat">
+            <div class="card card-project is-hoverable">
+                <div class="card-content has-text-centered">
+                    <span class="icon">
+                        <i class="fa-solid fa-location-dot fa-2x"></i>
+                    </span>
+                    <h3 class="subtitle is-3">Chat</h3>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+
+
+
+<div class="columns is-multiline is-centered m-5 ">
+    <div class="column">
+        <a href="/notes">
+            <div class="card card-project is-hoverable">
+                <div class="card-content has-text-centered">
+                    <span class="icon">
+                        <i class="fa-solid fa-circle-info fa-2x"></i>
+                    </span>
+                    <h3 class="subtitle is-3">Notes</h3>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="column">
+        <a href="/todo">
+            <div class="card card-project is-hoverable">
+                <div class="card-content has-text-centered">
+                    <span class="icon">
+                        <i class="fa-solid fa-magnifying-glass fa-2x"></i>
+                    </span>
+                    <h3 class="subtitle is-3">ToDo</h3>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="column">
+        <a href="/chat">
+            <div class="card card-project is-hoverable">
+                <div class="card-content has-text-centered">
+                    <span class="icon">
+                        <i class="fa-solid fa-bell fa-2x"></i>
+                    </span>
+                    <h3 class="subtitle is-3">Chat</h3>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+{{end}}

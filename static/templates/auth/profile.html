@@ -1,0 +1,59 @@
+{{define "content"}}
+
+<div class="container">
+
+    <section class="hero is-info mb-5 mt-5">
+        <div class="columns">
+            <div class="column"></div>
+            <div class="column is-4 is-offset-one-quarter">
+                <figure class="image is-128x128">
+                    {{if .AvatarSrc}}
+                    <img class="is-rounded" src="{{.AvatarSrc}}" />
+                    {{else}}
+                    <img src="https://bulma.io/assets/images/placeholders/128x128.png" />
+                    {{end}}
+                </figure>
+            </div>
+            <div class="column"></div>
+        </div>
+    </section>
+
+    <div class="field mb-5">
+        <label class="label">ID</label>
+        <div class="control has-icons-left has-icons-right">
+            <input class="input" type="text" disabled placeholder="Text input" value="{{.User.ID}}">
+            <span class="icon is-small is-left">
+                <i class="fas fa-id-card"></i>
+            </span>
+        </div>
+    </div>
+
+    <div class="field mb-5">
+        <label class="label">Username</label>
+        <div class="control has-icons-left has-icons-right">
+            <input class="input" type="text" disabled placeholder="No username" value="{{.User.Nickname}}">
+            <span class="icon is-small is-left">
+                <i class="fas fa-user"></i>
+            </span>
+        </div>
+    </div>
+
+    <div class="field mb-5">
+        <label class="label">Email</label>
+        <div class="control has-icons-left has-icons-right">
+            <input class="input" type="email" disabled placeholder="Email input" value="{{.User.Email}}">
+            <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+            </span>
+        </div>
+    </div>
+
+    <div class="field mb-5 has-text-right">
+        <div class="control">
+            <a href="/logout"><button class="button is-danger">Logout</button></a>
+        </div>
+    </div>
+
+</div>    
+
+{{end}}

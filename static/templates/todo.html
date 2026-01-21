@@ -1,52 +1,31 @@
-<!DOCTYPE html>
-<html>
+{{define "content"}}
 
-<head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Todo</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
-</head>
+<section class="section">
+    <h3 class="title">ToDo</h3>
+    <h3 class="subtitle">The simple space for tasks. Add it!</h3>
+</section>
 
-<body>
-    <header class="container">
-        <nav>
-            <ul>
-                <li><strong><a href="/">Site</a></strong></li>
-            </ul>
-            <ul>
-                <li><a href="/notes">Notes</a></li>
-                <li><a href="/todo">ToDo</a></li>
-                <li><a href="/chat">Chat</a></li>
-            </ul>
-        </nav>
-    </header>
+<section class="m-2" id="task">
+    <h2 class="subtitle is-3 m-2">New task:</h2>
+    <form action="/todo/create" method="POST">
+        <div class="field is-grouped">
+            <div class="control is-expanded"> <input class="input" name="taskInput" type="text" placeholder=""
+                    autocomplete="off" required minlength="4" maxlength="40"></div>
+            <div class="control"><input class="button is-info is-rounded" type="submit" value="Add"></div>
+        </div>
+    </form>
+</section>
+<h6 class="subtitle is-4 m-2">Tasks <ins>{{.TaskCount}}</ins>: </h6>
+{{range .Tasks}}
+<div class="container m-2">
+    <form action="/todo/update" method="POST" class="field mb-3">
+    <label class="checkbox m-1">
+        <input type="hidden" name="id" value="{{.ID}}">
+        <input class="checkbox" name="done" type="checkbox" {{if .Done}}disabled checked {{end}} onchange="this.form.submit()">
+        {{.ID}}. {{.Text}}
+    </label>
+</form>
+</div>
+{{end}}
 
-    <main class="container">
-
-        <section id="task">
-            <h2>New task: </h2>
-            <form action="/todo/create" method="POST">
-                <fieldset role="group">
-                    <input name="taskInput" type="text" placeholder="" autocomplete="off" required minlength="4"
-                        maxlength="40">
-                    <input type="submit" value="Add">
-                </fieldset>
-            </form>
-        </section>
-        <h6>Tasks <ins>{{.TaskCount}}</ins>: </h6>
-        {{range .Tasks}}
-        <form action="/todo/update" method="POST">
-            <fieldset role="group">
-                <input type="hidden" name="id" value="{{.ID}}">
-                <input name="done" type="checkbox" {{if .Done}}disabled checked {{end}} onchange="this.form.submit()">
-                <input type="text" value="{{.ID}}. {{.Text}}" {{if .Done}}aria-invalid="false" disabled{{end}}>
-            </fieldset>
-        </form>
-        {{end}}
-    </main>
-
-</body>
-
-</html>
+{{end}}

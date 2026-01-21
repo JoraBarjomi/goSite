@@ -1,0 +1,118 @@
+{{define "content"}}
+
+<div class="container">
+
+  <section class="section mb-5 mt-5">
+    <h1 class="title">Register Here</h1>
+    <h1 class="subtitle">Creatre your account it's easy!</h1>
+  </section>
+
+  <form action="/register/create" method="POST" enctype="multipart/form-data" onsubmit="return validPassword()">
+
+    <div class="field mb-5">
+      <label class="label">Username</label>
+      <div class="control has-icons-left has-icons-right">
+        <input name="username" class="input" type="text" placeholder="Your username" value="" minlength="4" maxlength="20"
+          required>
+        <span class="icon is-small is-left">
+          <i class="fas fa-user"></i>
+        </span>
+      </div>
+    </div>
+
+    <div class="field mb-5">
+      <label class="label">Email</label>
+      <div class="control has-icons-left has-icons-right">
+        <input name="email" class="input" type="email" placeholder="Your email" autocomplete="on" value=""
+          minlength="6" maxlength="30" required>
+        <span class="icon is-small is-left">
+          <i class="fas fa-envelope"></i>
+        </span>
+      </div>
+    </div>
+
+    <div class="field mb-5 ">
+      <label class="label">Password</label>
+      <div class="control has-icons-left has-icons-right">
+        <input id="psw" name="password" class="input" type="password" autocomplete="off"
+          placeholder="Type your password" aria-label="Password" required minlength="6" maxlength="40"
+          pattern="(?=.*[!@#$%^&*]).{6,}" title="Use at least one special symbol!">
+        <span class="icon is-small is-left">
+          <i class="fas fa-lock"></i>
+        </span>
+      </div>
+    </div>
+
+    <div class="field mb-5">
+      <label class="label">Confirm password</label>
+      <div class="control has-icons-left has-icons-right">
+        <input id="pswConf" name="passwordConf" class="input" type="password" autocomplete="off"
+          placeholder="Type your password again" aria-label="Password" required minlength="6" maxlength="40"
+          pattern="(?=.*[!@#$%^&*]).{6,}" title="Use at least one special symbol!">
+        <span class="icon is-small is-left">
+          <i class="fas fa-lock-open"></i>
+        </span>
+      </div>
+      <p id="errorMessage" class="help is-danger"></p>
+    </div>
+</div>
+
+<div class="field mb-5 mt-5">
+  <label class="label">Avatar</label>
+  <div class="control">
+    <div class="file">
+      <label class="file-label">
+        <input name="avatar" class="file-input" type="file" required />
+        <span class="file-cta">
+          <span class="file-icon">
+            <i class="fas fa-upload"></i>
+          </span>
+          <span class="file-label"> Choose a file… </span>
+        </span>
+      </label>
+    </div>
+  </div>
+</div>
+
+<div class="field mb-5">
+  <div class="control">
+    <label class="checkbox">
+      <input type="checkbox" required>
+      I agree to the <a href="/">terms and conditions</a>
+    </label>
+  </div>
+</div>
+
+<div class="buttons is-right mb-5">
+  <div class="control">
+    <button class="button is-link is-success">Submit</button>
+  </div>
+  <div class="control">
+    <button class="button is-link is-warning">Cancel</button>
+  </div>
+</div>
+
+</form>
+
+</div>
+
+<script>
+  function validPassword() {
+    const password = document.getElementById('psw').value;
+    const passwordConf = document.getElementById('pswConf').value;
+    const errorMessage = document.getElementById('errorMessage');
+
+    if (password != passwordConf) {
+      errorMessage.textContent = 'Password mismatch!!!';
+      errorMessage.classList.add('is-danger');
+      return false;
+    } else {
+      errorMessage.textContent = '';
+      errorMessage.classList.remove('is-danger');
+      errorMessage.classList.add('is-success');
+      return true;
+    }
+  }
+</script>
+
+{{end}}

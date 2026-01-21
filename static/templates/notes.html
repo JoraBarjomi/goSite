@@ -1,59 +1,35 @@
-<!DOCTYPE html>
-<html>
+{{define "content"}}
+<section class="section">
+    <h3 class="title">Notes</h3>
+    <h3 class="subtitle">The simple space for notes. Just write something here not too long!</h3>
+</section>
 
-<head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Notes</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
-</head>
-
-<body>
-    <header class="container">
-        <nav>
-            <ul>
-                <li><strong><a href="/">Site</a></strong></li>
-            </ul>
-            <ul>
-                <li><a href="/notes">Notes</a></li>
-                <li><a href="/todo">ToDo</a></li>
-                <li><a href="/chat">Chat</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <main class="container">
-        <hgroup>
-            <h3>Notes</h3>
-            <p>The simple space for notes. Just write something here not too long!</p>
-        </hgroup>
-        <form action="/notes/create" method="POST">
-            <div class="grid">
-                <div><input type="text" id="text" name="textInput" placeholder="Text" required minlength="5"
-                        maxlength="120"></div>
-                <div><input type="text" id="author" name="authorInput" placeholder="Author" required minlength="4"
-                        maxlength="20"></div>
-            </div>
-            <div><input type="submit"></div>
-        </form>
-        <div>
-            <h6>Found <ins>{{.NoteCount}}</ins> notes:</h6>
+<form action="/notes/create" method="POST">
+    <div class="field is-grouped">
+        <div class="control is-expanded">
+            <input class="input" type="text" id="text" name="textInput" placeholder="Text" required minlength="5"
+                maxlength="120">
         </div>
-        <div>
-            <ul>
-                {{range .Notes}}
-                <blockquote>
-                    {{.Text}}
-                    <footer>
-                        <cite>- {{.Author}}</cite>
-                    </footer>
-                </blockquote>
-                {{end}}
-            </ul>
+        <div class="control">
+            <input class="input" type="text" id="author" name="authorInput" placeholder="Name" required minlength="4"
+                maxlength="20">
         </div>
-    </main>
+        <div class="control"><input class="button is-info is-rounded" type="submit"></div>
+    </div>
+</form>
+<div>
+    <h4 class="subtitle is-3 m-2">Found <ins>{{.NoteCount}}</ins> notes:</h4>
+</div>
+<div class="content m-2 mt-3 mb-6">
 
-</body>
+    {{range .Notes}}
+    <blockquote>
+        {{.Text}}
+        <footer>
+            <cite>- {{.Author}}</cite>
+        </footer>
+    </blockquote>
+    {{end}}
 
-</html>
+</div>
+{{end}}

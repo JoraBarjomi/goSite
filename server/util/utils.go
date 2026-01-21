@@ -3,7 +3,9 @@ package utils
 import (
 	"database/sql"
 	"log"
+	"os"
 
+	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 )
 
@@ -27,13 +29,15 @@ type Note struct {
 	Text   string
 }
 
-type NotesData struct {
-	NoteCount int
-	Notes     []Note
-}
-
 func InitConn() *sql.DB {
-	connStr := "host=localhost port=5432 user=postgres password=gosha123X dbname=sitedb sslmode=disable"
+
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+
+	var password = os.Getenv("PSWD")
+	connStr := "host=localhost port=5432 user=postgres password=" + password + " dbname=sitedb sslmode=disable"
 	DB, err := sql.Open("postgres", connStr)
 	Check(err)
 	if err = DB.Ping(); err != nil {

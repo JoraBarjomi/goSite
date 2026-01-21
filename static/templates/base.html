@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>{{.Title}}</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+</head>
+
+<body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="/">
+                <svg width="640" height="160" viewBox="0 0 640 160" xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 1440 320">
+                    <path fill="#00CBA9" fill-opacity="1"
+                        d="M0,288L7.3,250.7C14.5,213,29,139,44,128C58.2,117,73,171,87,165.3C101.8,160,116,96,131,85.3C145.5,75,160,117,175,149.3C189.1,181,204,203,218,202.7C232.7,203,247,181,262,165.3C276.4,149,291,139,305,138.7C320,139,335,149,349,165.3C363.6,181,378,203,393,186.7C407.3,171,422,117,436,90.7C450.9,64,465,64,480,80C494.5,96,509,128,524,149.3C538.2,171,553,181,567,202.7C581.8,224,596,256,611,250.7C625.5,245,640,203,655,192C669.1,181,684,203,698,213.3C712.7,224,727,224,742,192C756.4,160,771,96,785,80C800,64,815,96,829,138.7C843.6,181,858,235,873,218.7C887.3,203,902,117,916,90.7C930.9,64,945,96,960,101.3C974.5,107,989,85,1004,74.7C1018.2,64,1033,64,1047,64C1061.8,64,1076,64,1091,74.7C1105.5,85,1120,107,1135,112C1149.1,117,1164,107,1178,106.7C1192.7,107,1207,117,1222,101.3C1236.4,85,1251,43,1265,69.3C1280,96,1295,192,1309,240C1323.6,288,1338,288,1353,256C1367.3,224,1382,160,1396,160C1410.9,160,1425,224,1433,256L1440,288L1440,0L1432.7,0C1425.5,0,1411,0,1396,0C1381.8,0,1367,0,1353,0C1338.2,0,1324,0,1309,0C1294.5,0,1280,0,1265,0C1250.9,0,1236,0,1222,0C1207.3,0,1193,0,1178,0C1163.6,0,1149,0,1135,0C1120,0,1105,0,1091,0C1076.4,0,1062,0,1047,0C1032.7,0,1018,0,1004,0C989.1,0,975,0,960,0C945.5,0,931,0,916,0C901.8,0,887,0,873,0C858.2,0,844,0,829,0C814.5,0,800,0,785,0C770.9,0,756,0,742,0C727.3,0,713,0,698,0C683.6,0,669,0,655,0C640,0,625,0,611,0C596.4,0,582,0,567,0C552.7,0,538,0,524,0C509.1,0,495,0,480,0C465.5,0,451,0,436,0C421.8,0,407,0,393,0C378.2,0,364,0,349,0C334.5,0,320,0,305,0C290.9,0,276,0,262,0C247.3,0,233,0,218,0C203.6,0,189,0,175,0C160,0,145,0,131,0C116.4,0,102,0,87,0C72.7,0,58,0,44,0C29.1,0,15,0,7,0L0,0Z">
+                    </path>
+                </svg>
+            </a>
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
+                data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start">
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">
+                        More
+                    </a>
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item" href="/notes">
+                            Notes
+                        </a>
+                        <hr class="navbar-divider">
+                        <a class="navbar-item" href="/todo">
+                            ToDo
+                        </a>
+                        <hr class="navbar-divider">
+                        <a class="navbar-item" href="/chat">
+                            Chat
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            {{if not .IsLoggedIn}}
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <a class="button is-primary" href="/register">
+                            <strong>Sign up</strong>
+                        </a>
+                        <a class="button is-light" href="/login">
+                            Log in
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {{else}}
+            <div class="navbar-end">
+                {{if .User.AvatarURL}}
+                <figure class="image is-48x48 navbar-item">
+                    <a href="/profile"><img class="is-rounded" src="{{.User.AvatarURL}}" /></a>
+                </figure>
+                {{else}}
+                <figure class="image is-48x48">
+                    <img class="is-rounded" src="https://bulma.io/assets/images/placeholders/128x128.png" />
+                </figure>
+                {{end}}
+            </div>
+            {{end}}
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            {{block "content" .}}{{end}}
+        </div>
+    </main>
+
+</body>
+
+<footer class="footer">
+    <div class="content">
+        <p class="has-text-centered">
+            <strong>Site</strong> by <a href="https://github.com/JoraBarjomi">Jora Barjomi</a>.
+        </p>
+    </div>
+</footer>
+
+</html>

@@ -1,59 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
+{{define "content"}}
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Login - Site</title>
-  <meta name="description" content="A minimalist layout for Login pages. Built with Pico CSS.">
-  <link rel="shortcut icon" href="https://picocss.com/favicon.ico">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
-</head>
+<div class="container">
 
-<body>
-  <nav class="container-fluid">
-    <ul>
-      <li><strong><a href="/">Site</a></strong></li>
-    </ul>
-    <ul>
-      <li><strong><a href="/logout">Logout</a></strong></li>
-    </ul>
-  </nav>
-  <main class="container">
-    <article class="grid">
-      <div>
-        <hgroup>
-          <h1>Sign in</h1>
-          <p>A minimalist layout for Login pages</p>
-        </hgroup>
-        <form>
-          <input type="text" name="login" placeholder="Login" aria-label="Login" autocomplete="username" required>
-          <input type="password" name="password" placeholder="Password" aria-label="Password"
-            autocomplete="current-password" required>
-          <fieldset>
-            <label for="remember">
-              <input type="checkbox" role="switch" id="remember" name="remember">
-              Remember me
-            </label>
-          </fieldset>
-          <button type="submit" class="contrast" onclick="event.preventDefault()">Login</button>
-        </form>
-        <button type="submit" class="contrast"><a href="/auth/google">Login with google</a></button>
+  <section class="section mb-3">
+    <h1 class="title">Sign in</h1>
+    <h1 class="subtitle">Sign up <a href="/register">here</a></h1>
+  </section>
+
+  <form action="/login/auth" method="POST">
+    <div class="field mb-3">
+      <label class="label">Email</label>
+      <div class="control has-icons-left has-icons-right">
+        <input class="input" type="text" name="email" placeholder="Type your username" aria-label="Login"
+          autocomplete="username" required>
+        <span class="icon is-small is-left">
+          <i class="fas fa-user"></i>
+        </span>
       </div>
-      <div></div>
-    </article>
-  </main>
-  <!-- ./ Main -->
+    </div>
 
-  <!-- Footer -->
-  <footer class="container-fluid">
-    <small>Built with <a href="https://picocss.com" class="secondary">Pico</a> •
-      <a href="https://github.com/picocss/examples/tree/master/v1-sign-in/" class="secondary">Source code</a></small>
-  </footer>
-  <!-- ./ Footer -->
+    <div class="field mb-3">
+      <label class="label">Password</label>
+      <div class="control has-icons-left has-icons-right">
+        <input class="input" type="password" name="password" placeholder="Type your password" aria-label="Password"
+          autocomplete="current-password" required>
+        <span class="icon is-small is-left">
+          <i class="fas fa-lock"></i>
+        </span>
+      </div>
+    </div>
 
-  <!-- Minimal theme switcher -->
-  <script src="js/minimal-theme-switcher.js"></script>
-</body>
+    <fieldset class="mb-3">
+      <label for="remember">
+        <input class="checkbox" type="checkbox" role="switch" id="remember" name="remember">
+        Remember me
+      </label>
+    </fieldset>
 
-</html>
+    <div class="field m-3 has-text-right">
+      <div class="control">
+        <button class="button is-link mb-3" type="submit" class="contrast">Login</button>
+      </div>
+    </div>
+
+  </form>
+
+  <div class="container has-text-centered mb-5">
+    <h1 class="subtitle mb-5">Login with: </h1>
+    <button class="button is-rounded" type="submit" class="contrast"><a href="/auth/google"><i
+          class="fab fa-google"></i></a></button>
+    <button class="button is-rounded" type="submit" class="contrast"><a href="/auth/google"><i
+          class="fab fa-github"></i></a></button>
+  </div>
+
+</div>
+
+{{end}}
